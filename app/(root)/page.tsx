@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
+import { UserButton } from "@clerk/nextjs";
+import AuthLayout from "../(auth)/layout";
 
-export default function Home() {
+const SetupPage = () => {
   return (
-    <div className="p-4">
-      <Button size="sm" variant="destructive">
-        Click Me
-      </Button>
-    </div>
+    <nav className="p-4">
+      <UserButton afterSignOutUrl="/" />
+    </nav>
   );
-}
+};
+
+export default SetupPage;
