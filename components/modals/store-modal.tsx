@@ -44,9 +44,14 @@ export const StoreModal = () => {
 
       if (response.status === 200) {
         form.reset();
-    console.log(values);
+        toast.success("Store created successfully!", {
+          closeButton: false,
+        });
       }
     } catch (error) {
+      toast.error("Something went wrong!", {
+        closeButton: false,
+      });
     } finally {
       setIsLoading(false);
     }
