@@ -1,6 +1,7 @@
 "use client";
 
 import AlertModal from "@/components/modals/alert-modal";
+import ApiAlert from "@/components/ui/api-alert";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,6 +14,7 @@ import {
 import Heading from "@/components/ui/header";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import useOrigin from "@/hooks/use-origin";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store } from "@prisma/client";
 import axios from "axios";
@@ -35,6 +37,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const SettingsForm = ({ store }: ISettingsForm) => {
   const router = useRouter();
+  const origin = useOrigin();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -96,6 +99,7 @@ const SettingsForm = ({ store }: ISettingsForm) => {
         onClose={() => setIsOpen(false)}
         onConfirm={onDelete}
       />
+
       <div className="flex items-center justify-between">
         <Heading title="Settings" description="Manage store preferences" />
         <Button
@@ -122,6 +126,7 @@ const SettingsForm = ({ store }: ISettingsForm) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Name</FormLabel>
+
                   <FormControl>
                     <Input
                       {...field}
@@ -130,6 +135,7 @@ const SettingsForm = ({ store }: ISettingsForm) => {
                       autoComplete="off"
                     />
                   </FormControl>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -141,6 +147,14 @@ const SettingsForm = ({ store }: ISettingsForm) => {
           </Button>
         </form>
       </Form>
+
+      <Separator />
+
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${origin}/api/${store.id}`}
+        variant="public"
+      />
     </>
   );
 };
