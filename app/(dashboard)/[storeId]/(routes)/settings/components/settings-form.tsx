@@ -66,9 +66,36 @@ const SettingsForm = ({ store }: ISettingsForm) => {
     }
   };
 
+  const onDelete = async () => {
+    try {
+      setIsLoading(true);
+      const req = await axios.delete(`/api/stores/${store.id}`);
+
+      if (req.status === 200) {
+        router.push("/");
+        toast.success("Store deleted successfully!", {
+          icon: "🚀",
+        });
+      }
+    } catch (error) {
+      toast.error("Make sure you removed all products and categories first.", {
+        icon: "👾",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsOpen(false);
+    }
+  };
 
   return (
     <>
+      <AlertModal
+        store={store}
+        isOpen={isOpen}
+        isLoading={isLoading}
+        onClose={() => setIsOpen(false)}
+        onConfirm={onDelete}
+      />
       <div className="flex items-center justify-between">
         <Heading title="Settings" description="Manage store preferences" />
         <Button
