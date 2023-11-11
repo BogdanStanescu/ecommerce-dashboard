@@ -1,6 +1,6 @@
 interface IHeadingProps {
   title: string;
-  description: string;
+  description?: string;
 }
 
 const Heading = ({ title, description }: IHeadingProps) => {

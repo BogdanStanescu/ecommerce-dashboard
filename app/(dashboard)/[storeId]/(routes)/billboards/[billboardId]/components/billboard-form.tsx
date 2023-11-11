@@ -1,5 +1,6 @@
 "use client";
 
+import AlertModal from "@/components/modals/alert-modal";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -59,7 +60,14 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
           data
         );
       } else {
-        await axios.post(`/api/${params.storeId}/billboards`, data);
+        const request = await axios.post(
+          `/api/${params.storeId}/billboards`,
+          data
+        );
+
+        if (request.status === 200) {
+          router.push(`/${params.storeId}/billboards`);
+        }
       }
 
       router.refresh();
@@ -84,10 +92,13 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
       );
       router.refresh();
       router.push(`/${params.storeId}/billboards`);
-      toast.success("Billboard deleted.");
+      toast.success("Billboard deleted successfully.", {
+        icon: "🚀",
+      });
     } catch (error: any) {
       toast.error(
-        "Make sure you removed all categories using this billboard first."
+        "Make sure you removed all categories using this billboard first.",
+        { icon: "👾" }
       );
     } finally {
       setIsLoading(false);
@@ -97,7 +108,6 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
 
   const title = billboard ? "Edit Billboard" : "New Billboard";
   const action = billboard ? "Save Changes" : "Create Billboard";
-  const description = billboard ? "Edit Billboard" : "Add a new billboard";
   const toastMessage = billboard
     ? "Billboard updated successfully!"
     : "Billboard created successfully!";
@@ -105,11 +115,26 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
 
   return (
     <>
+      {billboard && (
+        <AlertModal
+          label={billboard.label}
+          isOpen={isOpen}
+          isLoading={isLoading}
+          onClose={() => setIsOpen(false)}
+          onConfirm={onDelete}
+        />
+      )}
+
       <div className="flex items-center justify-between">
-        <Heading title={title} description={description} />
+        <Heading title={title} />
 
         {billboard && (
-          <Button disabled={isLoading} variant="destructive" size="sm">
+          <Button
+            disabled={isLoading}
+            variant="destructive"
+            size="sm"
+            onClick={() => setIsOpen(true)}
+          >
             <Trash className="h-4 w-4" onClick={() => setIsOpen(true)} />
           </Button>
         )}
@@ -127,7 +152,7 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
             name="image_url"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Background Image</FormLabel>
+                <FormLabel>Background Image:</FormLabel>
 
                 <FormControl>
                   <ImageUpload
@@ -173,8 +198,6 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
           </Button>
         </form>
       </Form>
-
-      <Separator />
     </>
   );
 };

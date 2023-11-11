@@ -1,5 +1,6 @@
 "use client";
 
+import ApiList from "@/components/ui/api-list";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import Heading from "@/components/ui/header";
@@ -21,7 +22,7 @@ const BillboardClient = ({ data }: IBillboardClient) => {
       <div className="flex items-center justify-between">
         <Heading
           title={`Billboards (${data.length})`}
-          description="Manage billboards for your store"
+          description="Manage Billboards for your store"
         />
 
         <Button
@@ -35,6 +36,12 @@ const BillboardClient = ({ data }: IBillboardClient) => {
       <Separator />
 
       <DataTable columns={columns} data={data} searchKey="label" />
+
+      <Heading title="API" description="API calls for Billboards" />
+
+      <Separator />
+
+      <ApiList id="billboardId" name="billboard-name" />
     </>
   );
 };
