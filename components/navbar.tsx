@@ -1,5 +1,5 @@
 import React from "react";
-import prismaDB from "@/lib/prismaDB";
+import prisma from "@/lib/prisma";
 import MainNav from "@/components/main-nav";
 import StoreSwitcher from "@/components/store-switcher";
 import { redirect } from "next/navigation";
@@ -12,7 +12,7 @@ const Navbar = async () => {
     redirect("/sign-in");
   }
 
-  const stores = await prismaDB.store.findMany({
+  const stores = await prisma.store.findMany({
     where: {
       user_id: userId,
     },

@@ -1,4 +1,4 @@
-import prismaDB from "@/lib/prismaDB";
+import prisma from "@/lib/prisma";
 import Navbar from "@/components/navbar";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
@@ -18,7 +18,7 @@ export default async function DashboardLayout({
     redirect("/sign-in");
   }
 
-  const store = await prismaDB.store.findFirst({
+  const store = await prisma.store.findFirst({
     where: {
       id: params.storeId,
       user_id: userId,

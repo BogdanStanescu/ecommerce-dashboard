@@ -1,4 +1,4 @@
-import prismaDB from "@/lib/prismaDB";
+import prisma from "@/lib/prisma";
 
 interface IDashboardPageProps {
   params: {
@@ -7,7 +7,7 @@ interface IDashboardPageProps {
 }
 
 const DashboardPage = async ({ params }: IDashboardPageProps) => {
-  const store = await prismaDB.store.findFirst({
+  const store = await prisma.store.findFirst({
     where: {
       id: params.storeId,
     },
