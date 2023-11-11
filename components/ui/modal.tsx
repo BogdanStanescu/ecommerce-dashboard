@@ -26,7 +26,7 @@ export const Modal = ({
 }: IModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={() => !isOpen && onClose()}>
-      <DialogContent>
+      <DialogContent onClose={onClose}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
