@@ -4,27 +4,27 @@ import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import useClipboard from "@/hooks/use-clipboard";
 
-interface IApiAlertProps {
+interface IAPIAlertProps {
   title: string;
   description: string;
   variant: "public" | "admin";
 }
 
-const textMap: Record<IApiAlertProps["variant"], string> = {
+const textMap: Record<IAPIAlertProps["variant"], string> = {
   public: "Public",
   admin: "Admin",
 };
 
-const variantMap: Record<IApiAlertProps["variant"], BadgeProps["variant"]> = {
+const variantMap: Record<IAPIAlertProps["variant"], BadgeProps["variant"]> = {
   public: "secondary",
   admin: "destructive",
 };
 
-const ApiAlert = ({
+const IAPIAlert = ({
   title,
   description,
   variant = "public",
-}: IApiAlertProps) => {
+}: IAPIAlertProps) => {
   const clipboard = useClipboard({
     label: "API Key",
     data: description,
@@ -52,4 +52,4 @@ const ApiAlert = ({
   );
 };
 
-export default ApiAlert;
+export default IAPIAlert;

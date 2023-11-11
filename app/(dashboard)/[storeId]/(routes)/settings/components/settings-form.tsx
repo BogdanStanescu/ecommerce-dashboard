@@ -1,7 +1,7 @@
 "use client";
 
 import AlertModal from "@/components/modals/alert-modal";
-import ApiAlert from "@/components/ui/api-alert";
+import APIAlert from "@/components/ui/api-alert";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -93,7 +93,7 @@ const SettingsForm = ({ store }: ISettingsForm) => {
   return (
     <>
       <AlertModal
-        store={store}
+        label={store.name}
         isOpen={isOpen}
         isLoading={isLoading}
         onClose={() => setIsOpen(false)}
@@ -101,7 +101,7 @@ const SettingsForm = ({ store }: ISettingsForm) => {
       />
 
       <div className="flex items-center justify-between">
-        <Heading title="Settings" description="Manage store preferences" />
+        <Heading title="Settings" />
         <Button
           disabled={isLoading}
           variant="destructive"
@@ -150,7 +150,7 @@ const SettingsForm = ({ store }: ISettingsForm) => {
 
       <Separator />
 
-      <ApiAlert
+      <APIAlert
         title="NEXT_PUBLIC_API_URL"
         description={`${origin}/api/${store.id}`}
         variant="public"

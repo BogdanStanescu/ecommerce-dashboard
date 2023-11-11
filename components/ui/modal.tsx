@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 
 interface IModalProps {
   title: string;
@@ -29,7 +30,8 @@ export const Modal = ({
       <DialogContent onClose={onClose}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <Separator />
+          <DialogDescription className="pt-1">{description}</DialogDescription>
         </DialogHeader>
 
         <>{children}</>

@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
-import { Store } from "@prisma/client";
 
 interface IAlertModalProps {
-  store: Store;
+  label: string;
   isOpen: boolean;
   isLoading: boolean;
   onClose: () => void;
@@ -14,7 +13,7 @@ interface IAlertModalProps {
 }
 
 const AlertModal = ({
-  store,
+  label,
   isOpen,
   isLoading,
   onClose,
@@ -32,8 +31,8 @@ const AlertModal = ({
 
   return (
     <Modal
-      title={`Delete ${store.name}?`}
-      description="Are you sure you want to delete this store? This action cannot be undone. All store data will be permanently removed. "
+      title={`Delete ${label}?`}
+      description="Kindly confirm your decision to delete this. Please note that this action is irreversible, and all associated data will be permanently removed."
       isOpen={isOpen}
       onClose={onClose}
     >
