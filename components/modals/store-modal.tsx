@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, "Store name is required"),
@@ -27,7 +27,14 @@ type FormValues = z.infer<typeof formSchema>;
 
 export const StoreModal = () => {
   const storeModal = useStoreModal();
+  const [storeId, setStoreId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (storeId) {
+      window.location.assign(`/${storeId}`);
+    }
+  }, [storeId]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -42,10 +49,8 @@ export const StoreModal = () => {
       const response = await axios.post("/api/stores", values);
 
       if (response.status === 200) {
-        form.reset();
+        setStoreId(response.data.id);
       }
-
-      window.location.assign(`/${response.data.id}}`);
     } catch (error) {
       toast.error("Something went wrong!", {
         icon: "👾",
