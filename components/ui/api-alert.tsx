@@ -25,7 +25,10 @@ const ApiAlert = ({
   description,
   variant = "public",
 }: IApiAlertProps) => {
-  const copyClipboard = useClipboard(description);
+  const clipboard = useClipboard({
+    label: "API Key",
+    data: description,
+  });
 
   return (
     <Alert>
@@ -41,7 +44,7 @@ const ApiAlert = ({
           {description}
         </code>
 
-        <Button variant="outline" size="icon" onClick={copyClipboard}>
+        <Button variant="outline" size="icon" onClick={clipboard}>
           <Copy className="h-4 w-4" />
         </Button>
       </AlertDescription>

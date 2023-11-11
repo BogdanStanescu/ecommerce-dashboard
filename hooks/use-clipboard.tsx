@@ -1,9 +1,14 @@
 import { toast } from "react-toastify";
 
-const useClipboard = (description: string) => {
+interface IClipboard {
+  data: string;
+  label: string;
+}
+
+const useClipboard = ({ data, label }: IClipboard) => {
   const onCopy = () => {
-    navigator.clipboard.writeText(description);
-    toast.success("Key copied to clipboard!", {
+    navigator.clipboard.writeText(data);
+    toast.info(`${label} copied to clipboard!`, {
       icon: "📋",
     });
   };
