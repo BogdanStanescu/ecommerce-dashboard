@@ -79,13 +79,9 @@ const CategoryForm = ({ billboards, category }: ICategoryForm) => {
 
       router.refresh();
 
-      toast.success(toastMessage, {
-        icon: toastIcon,
-      });
+      toast.success(toastMessage);
     } catch (error) {
-      toast.error("Something went wrong.", {
-        icon: "👾",
-      });
+      toast.error("Something went wrong.");
     } finally {
       setIsLoading(false);
     }
@@ -99,13 +95,10 @@ const CategoryForm = ({ billboards, category }: ICategoryForm) => {
       );
       router.refresh();
       router.push(`/${params.storeId}/categories`);
-      toast.success("Category deleted successfully.", {
-        icon: "🚀",
-      });
+      toast.success("Category deleted successfully.");
     } catch (error: any) {
       toast.error(
-        "Make sure you removed all products using this category first.",
-        { icon: "👾" }
+        "Make sure you removed all products using this category first."
       );
     } finally {
       setIsLoading(false);
@@ -118,7 +111,6 @@ const CategoryForm = ({ billboards, category }: ICategoryForm) => {
   const toastMessage = category
     ? "Category updated successfully!"
     : "Category created successfully!";
-  const toastIcon = category ? "📋" : "🚀";
 
   return (
     <>

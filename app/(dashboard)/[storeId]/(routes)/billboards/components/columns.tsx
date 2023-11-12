@@ -3,8 +3,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import CellAction from "./cell-actions";
 
-type Status = "pending" | "processing" | "success" | "failed";
-
 export type BillboardColumn = {
   id: string;
   label: string;

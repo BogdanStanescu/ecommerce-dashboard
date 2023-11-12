@@ -39,11 +39,10 @@ const CellAction = ({ data }: ICellActionProps) => {
       await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
       router.refresh();
 
-      toast.success("Billboard deleted successfully.", { icon: "🚀" });
+      toast.success("Billboard deleted successfully.");
     } catch (error: any) {
       toast.error(
-        "Make sure you removed all categories using this billboard first.",
-        { icon: "👾" }
+        "Make sure you removed all categories using this billboard first."
       );
     } finally {
       setIsLoading(false);

@@ -8,9 +8,7 @@ interface IClipboard {
 const useClipboard = ({ data, label }: IClipboard) => {
   const onCopy = () => {
     navigator.clipboard.writeText(data);
-    toast.info(`${label} copied to clipboard!`, {
-      icon: "📋",
-    });
+    toast.info(`${label} copied to clipboard!`);
   };
 
   return onCopy;

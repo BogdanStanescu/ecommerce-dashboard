@@ -56,9 +56,7 @@ const SettingsForm = ({ store }: ISettingsForm) => {
       const req = await axios.patch(`/api/stores/${store.id}`, data);
 
       if (req.status === 200) {
-        toast.success("Store updated successfully!", {
-          icon: "🚀",
-        });
+        toast.success("Store updated successfully!");
       }
 
       router.refresh();
@@ -76,14 +74,10 @@ const SettingsForm = ({ store }: ISettingsForm) => {
 
       if (req.status === 200) {
         router.push("/");
-        toast.success("Store deleted successfully!", {
-          icon: "🚀",
-        });
+        toast.success("Store deleted successfully!");
       }
     } catch (error) {
-      toast.error("Make sure you removed all products and categories first.", {
-        icon: "👾",
-      });
+      toast.error("Make sure you removed all products and categories first.");
     } finally {
       setIsLoading(false);
       setIsOpen(false);

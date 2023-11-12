@@ -2,4 +2,13 @@
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
-export const ToastProvider = () => <ToastContainer autoClose={3000} />;
+export const ToastProvider = () => {
+  return (
+    <ToastContainer
+      autoClose={3000}
+      icon={({ type }) =>
+        type === "success" ? "🚀" : type === "error" ? "👾" : "📋"
+      }
+    />
+  );
+};

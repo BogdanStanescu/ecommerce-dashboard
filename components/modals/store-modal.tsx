@@ -53,7 +53,6 @@ export const StoreModal = () => {
       }
     } catch (error) {
       toast.error("Something went wrong!", {
-        icon: "👾",
         closeButton: false,
       });
     } finally {

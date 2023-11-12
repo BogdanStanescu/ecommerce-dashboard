@@ -72,13 +72,9 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
 
       router.refresh();
 
-      toast.success(toastMessage, {
-        icon: toastIcon,
-      });
+      toast.success(toastMessage);
     } catch (error) {
-      toast.error("Something went wrong.", {
-        icon: "👾",
-      });
+      toast.error("Something went wrong.");
     } finally {
       setIsLoading(false);
     }
@@ -92,13 +88,10 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
       );
       router.refresh();
       router.push(`/${params.storeId}/billboards`);
-      toast.success("Billboard deleted successfully.", {
-        icon: "🚀",
-      });
+      toast.success("Billboard deleted successfully.");
     } catch (error: any) {
       toast.error(
-        "Make sure you removed all categories using this billboard first.",
-        { icon: "👾" }
+        "Make sure you removed all categories using this billboard first."
       );
     } finally {
       setIsLoading(false);

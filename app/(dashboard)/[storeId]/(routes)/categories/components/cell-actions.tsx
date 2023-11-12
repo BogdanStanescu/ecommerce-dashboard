@@ -40,11 +40,10 @@ const CellAction = ({ data }: ICellActionProps) => {
       await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
       router.refresh();
 
-      toast.success("Category deleted successfully.", { icon: "🚀" });
+      toast.success("Category deleted successfully.");
     } catch (error: any) {
       toast.error(
-        "Make sure you removed all products using this category first.",
-        { icon: "👾" }
+        "Make sure you removed all products using this category first."
       );
     } finally {
       setIsLoading(false);
