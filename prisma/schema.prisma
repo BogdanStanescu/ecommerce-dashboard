@@ -16,6 +16,7 @@ model Store {
   updated_at DateTime    @updatedAt
   billboards Billboard[]
   categories Category[]
+  colors     Color[]
   sizes      Size[]
 
   @@map("stores")
@@ -61,4 +62,17 @@ model Size {
 
   @@index([store_id])
   @@map("sizes")
+}
+
+model Color {
+  id         String   @id @default(uuid())
+  name       String
+  value      String
+  store      Store    @relation(fields: [store_id], references: [id])
+  store_id   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([store_id])
+  @@map("colors")
 }
