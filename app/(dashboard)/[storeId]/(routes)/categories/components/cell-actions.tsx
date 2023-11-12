@@ -10,16 +10,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BillboardColumn } from "./columns";
+
 import { Separator } from "@/components/ui/separator";
 import useClipboard from "@/hooks/use-clipboard";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
 import AlertModal from "@/components/modals/alert-modal";
+import { CategoryColumn } from "./columns";
 
 interface ICellActionProps {
-  data: BillboardColumn;
+  data: CategoryColumn;
 }
 
 const CellAction = ({ data }: ICellActionProps) => {
@@ -28,21 +29,21 @@ const CellAction = ({ data }: ICellActionProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const clipboard = useClipboard({ label: "Billboard ID", data: data.id });
+  const clipboard = useClipboard({ label: "Category ID", data: data.id });
 
   const handleUpdate = () =>
-    router.push(`/${params.storeId}/billboards/${data.id}`);
+    router.push(`/${params.storeId}/categories/${data.id}`);
 
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
       router.refresh();
 
-      toast.success("Billboard deleted successfully.", { icon: "🚀" });
+      toast.success("Category deleted successfully.", { icon: "🚀" });
     } catch (error: any) {
       toast.error(
-        "Make sure you removed all categories using this billboard first.",
+        "Make sure you removed all products using this category first.",
         { icon: "👾" }
       );
     } finally {
@@ -54,7 +55,7 @@ const CellAction = ({ data }: ICellActionProps) => {
   return (
     <>
       <AlertModal
-        label={data.label}
+        label={data.name}
         isOpen={isOpen}
         isLoading={isLoading}
         onClose={() => setIsOpen(false)}
