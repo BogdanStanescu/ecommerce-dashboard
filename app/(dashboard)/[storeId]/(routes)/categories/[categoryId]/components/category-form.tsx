@@ -73,13 +73,11 @@ const CategoryForm = ({ billboards, category }: ICategoryForm) => {
         );
 
         if (request.status === 200) {
-          router.push(`/${params.storeId}/categories`);
+          toast.success(toastMessage);
+          router.back();
+          router.refresh();
         }
       }
-
-      router.refresh();
-
-      toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
     } finally {
@@ -191,6 +189,9 @@ const CategoryForm = ({ billboards, category }: ICategoryForm) => {
                     </FormControl>
 
                     <SelectContent>
+                      <SelectItem value="none" disabled hidden>
+                        Choose a billboard...
+                      </SelectItem>
                       {billboards.map((billboard) => (
                         <SelectItem key={billboard.id} value={billboard.id}>
                           {billboard.label}

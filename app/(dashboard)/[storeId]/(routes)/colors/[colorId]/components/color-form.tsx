@@ -66,13 +66,11 @@ const ColorForm = ({ color }: IColorFormProps) => {
         const request = await axios.post(`/api/${params.storeId}/colors`, data);
 
         if (request.status === 200) {
+          toast.success(toastMessage);
           router.back();
+          router.refresh();
         }
       }
-
-      router.refresh();
-
-      toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
     } finally {
@@ -83,10 +81,15 @@ const ColorForm = ({ color }: IColorFormProps) => {
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
-      router.refresh();
-      router.push(`/${params.storeId}/colors`);
-      toast.success("Color deleted successfully.");
+      const request = await axios.delete(
+        `/api/${params.storeId}/colors/${params.colorId}`
+      );
+
+      if (request.status === 200) {
+        toast.success("Color deleted successfully.");
+        router.back();
+        router.refresh();
+      }
     } catch (error: any) {
       toast.error("Make sure you removed all products using this color first.");
     } finally {

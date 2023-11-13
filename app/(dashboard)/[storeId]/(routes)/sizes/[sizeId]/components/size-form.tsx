@@ -62,13 +62,11 @@ const SizeForm = ({ size }: ISizeFormProps) => {
         const request = await axios.post(`/api/${params.storeId}/sizes`, data);
 
         if (request.status === 200) {
-          router.push(`/${params.storeId}/sizes`);
+          toast.success(toastMessage);
+          router.back();
+          router.refresh();
         }
       }
-
-      router.refresh();
-
-      toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
     } finally {

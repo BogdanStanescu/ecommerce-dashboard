@@ -57,9 +57,8 @@ const SettingsForm = ({ store }: ISettingsForm) => {
 
       if (req.status === 200) {
         toast.success("Store updated successfully!");
+        router.refresh();
       }
-
-      router.refresh();
     } catch (error) {
       toast.error("Something went wrong.");
     } finally {
@@ -74,6 +73,7 @@ const SettingsForm = ({ store }: ISettingsForm) => {
 
       if (req.status === 200) {
         router.push("/");
+        router.refresh();
         toast.success("Store deleted successfully!");
       }
     } catch (error) {

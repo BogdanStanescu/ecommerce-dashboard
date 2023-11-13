@@ -66,13 +66,11 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
         );
 
         if (request.status === 200) {
-          router.push(`/${params.storeId}/billboards`);
+          toast.success(toastMessage);
+          router.back();
+          router.refresh();
         }
       }
-
-      router.refresh();
-
-      toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
     } finally {
@@ -83,12 +81,15 @@ const BillboardForm = ({ billboard }: IBillboardForm) => {
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(
+      const request = await axios.delete(
         `/api/${params.storeId}/billboards/${params.billboardId}`
       );
-      router.refresh();
-      router.push(`/${params.storeId}/billboards`);
-      toast.success("Billboard deleted successfully.");
+
+      if (request.status === 200) {
+        toast.success("Billboard deleted successfully.");
+        router.back();
+        router.refresh();
+      }
     } catch (error: any) {
       toast.error(
         "Make sure you removed all categories using this billboard first."
