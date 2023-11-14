@@ -19,6 +19,7 @@ model Store {
   products   Product[]
   colors     Color[]
   sizes      Size[]
+  orders     Order[]
 
   @@map("stores")
 }
@@ -82,22 +83,23 @@ model Color {
 }
 
 model Product {
-  id          String   @id @default(uuid())
+  id          String       @id @default(uuid())
   name        String
   price       Int
-  is_featured Boolean  @default(false)
-  is_archived Boolean  @default(false)
-  store       Store    @relation(fields: [store_id], references: [id])
+  is_featured Boolean      @default(false)
+  is_archived Boolean      @default(false)
+  store       Store        @relation(fields: [store_id], references: [id])
   store_id    String
-  category    Category @relation(fields: [category_id], references: [id])
+  category    Category     @relation(fields: [category_id], references: [id])
   category_id String
-  size        Size     @relation(fields: [size_id], references: [id])
+  size        Size         @relation(fields: [size_id], references: [id])
   size_id     String
-  color       Color    @relation(fields: [color_id], references: [id])
+  color       Color        @relation(fields: [color_id], references: [id])
   color_id    String
   images      Image[]
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
+  OrderItems  OrderItems[]
 
   @@index([size_id])
   @@index([color_id])
@@ -116,4 +118,33 @@ model Image {
 
   @@index([product_id])
   @@map("images")
+}
+
+model Order {
+  id         String       @id @default(uuid())
+  store      Store        @relation(fields: [store_id], references: [id])
+  store_id   String
+  is_paid    Boolean      @default(false)
+  phone      String       @default("")
+  address    String       @default("")
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+  items      OrderItems[]
+
+  @@index([store_id])
+  @@map("orders")
+}
+
+model OrderItems {
+  id         String   @id @default(uuid())
+  order      Order    @relation(fields: [order_id], references: [id])
+  order_id   String
+  product    Product  @relation(fields: [product_id], references: [id])
+  product_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([order_id])
+  @@index([product_id])
+  @@map("order_items")
 }
