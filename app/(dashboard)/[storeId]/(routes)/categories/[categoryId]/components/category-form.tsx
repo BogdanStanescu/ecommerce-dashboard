@@ -51,10 +51,15 @@ const CategoryForm = ({ billboards, category }: ICategoryForm) => {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: category || {
-      name: "",
-      billboardId: "",
-    },
+    defaultValues: category
+      ? {
+          name: category.name,
+          billboardId: category.billboard_id,
+        }
+      : {
+          name: "",
+          billboardId: "",
+        },
   });
 
   const onSubmit = async (data: FormValues) => {
@@ -193,7 +198,10 @@ const CategoryForm = ({ billboards, category }: ICategoryForm) => {
                         Choose a billboard...
                       </SelectItem>
                       {billboards.map((billboard) => (
-                        <SelectItem key={billboard.id} value={billboard.id}>
+                        <SelectItem
+                          key={billboard.id}
+                          value={billboard.id.toString()}
+                        >
                           {billboard.label}
                         </SelectItem>
                       ))}

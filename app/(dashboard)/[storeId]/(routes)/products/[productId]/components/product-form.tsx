@@ -67,7 +67,16 @@ const ProductForm = ({
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: product || {
+    defaultValues: {
+      name: product?.name,
+      images: product?.images,
+      price: product?.price,
+      categoryId: product?.category_id,
+      colorId: product?.color_id,
+      sizeId: product?.size_id,
+      isFeatured: product?.is_featured,
+      isArchived: product?.is_archived,
+    } || {
       name: "",
       images: [],
       price: 0,
@@ -84,10 +93,16 @@ const ProductForm = ({
       setIsLoading(true);
 
       if (product) {
-        await axios.patch(
+        const request = await axios.patch(
           `/api/${params.storeId}/products/${params.productId}`,
           data
         );
+
+        if (request.status === 200) {
+          toast.success(toastMessage);
+          router.back();
+          router.refresh();
+        }
       } else {
         const request = await axios.post(
           `/api/${params.storeId}/products`,
@@ -135,6 +150,7 @@ const ProductForm = ({
     ? "Product updated successfully!"
     : "Product created successfully!";
 
+  console.log("images of product", product?.images);
   return (
     <>
       {product && (

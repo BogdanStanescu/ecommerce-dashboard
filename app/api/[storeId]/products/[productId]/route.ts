@@ -19,7 +19,7 @@ export async function GET(
 ) {
   try {
     if (!params.productId) {
-      return new NextResponse("Billboard ID is required", { status: 400 });
+      return new NextResponse("Product ID is required", { status: 400 });
     }
 
     const product = await prisma.product.findUnique({
@@ -88,11 +88,8 @@ export async function PATCH(
         images: {
           deleteMany: {},
           createMany: {
-            data: [
-              ...body.images.map((image) => ({
-                url: image,
-              })),
-            ],
+            // @ts-ignore
+            data: [...body.images.map((image: { url: string }) => image)],
           },
         },
       },

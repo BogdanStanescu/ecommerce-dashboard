@@ -13,7 +13,7 @@ interface IProductClientProps {
   data: ProductColumn[];
 }
 
-const BillboardClient = ({ data }: IProductClientProps) => {
+const ProductClient = ({ data }: IProductClientProps) => {
   const router = useRouter();
   const params = useParams();
 
@@ -39,9 +39,9 @@ const BillboardClient = ({ data }: IProductClientProps) => {
 
       <Separator />
 
-      <ApiList id="productId" name="product-name" />
+      <ApiList id="productId" name="products" />
     </>
   );
 };
 
-export default BillboardClient;
+export default ProductClient;
