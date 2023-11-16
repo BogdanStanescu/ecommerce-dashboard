@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t absolute bottom-0 right-0 w-full">
+    <footer className="w-full bg-white border-t absolute bottom-0">
       <div className="mx-auto py-10">
         <p className="text-center text-xs text-black">
           &copy; 2023 E-Commerce Dashboard. All rights reserved. Powered by{" "}
