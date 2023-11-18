@@ -41,7 +41,7 @@ const BillboardClient = ({ data }: IBillboardClient) => {
 
       <Separator />
 
-      <ApiList id="billboardId" name="billboard-name" />
+      <ApiList id="billboardId" name="billboards" />
     </>
   );
 };
