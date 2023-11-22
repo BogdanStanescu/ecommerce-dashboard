@@ -150,7 +150,6 @@ const ProductForm = ({
     ? "Product updated successfully!"
     : "Product created successfully!";
 
-  console.log("images of product", product?.images);
   return (
     <>
       {product && (
@@ -194,15 +193,15 @@ const ProductForm = ({
 
                 <FormControl>
                   <ImageUpload
-                    value={field.value.map((image) => image.url)}
-                    isDisabled={isLoading}
+                    value={(field.value || []).map((image) => image.url)}
                     onChange={(url) =>
                       field.onChange([...field.value, { url }])
                     }
+                    isDisabled={isLoading}
                     onRemove={(url) =>
-                      field.onChange(
-                        field.value.filter((image) => image.url !== url)
-                      )
+                      field.onChange([
+                        ...field.value.filter((current) => current.url !== url),
+                      ])
                     }
                   />
                 </FormControl>

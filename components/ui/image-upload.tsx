@@ -35,7 +35,7 @@ function ImageUpload({
   return (
     <div>
       <div className="flex items-center gap-4 mb-4">
-        {value.map((image) => (
+        {value?.map((image) => (
           <div
             key={image}
             className="relative w-[200px] h-[200px] rounded-md overflow-hidden"
