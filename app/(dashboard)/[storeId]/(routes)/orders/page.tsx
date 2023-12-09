@@ -37,6 +37,7 @@ const Orders = async ({
       order.items.reduce((total, item) => total + item.product.price, 0)
     ),
     createdAt: format(order.created_at, "MMMM do, yyyy"),
+    isPaid: order.is_paid,
   }));
 
   return (
